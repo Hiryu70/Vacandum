@@ -3,11 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Vacandum.API.Controllers
 {
-	[Route("api/[controller]")]
+	[Route("api/vacancy")]
 	[ApiController]
-	public class ValuesController : ControllerBase
+	public class VacancyController : ControllerBase
 	{
 		[HttpGet]
+		[Route("test")]
 		public ActionResult<IEnumerable<string>> Get()
 		{
 			return new string[] { "value1", "value2" };
