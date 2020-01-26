@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.202
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vacandum.API", "Vacandum.API\Vacandum.API.csproj", "{B125921B-6A9C-4B34-8E3C-6CC4C6606FED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vacandum.API", "Vacandum.API\Vacandum.API.csproj", "{B125921B-6A9C-4B34-8E3C-6CC4C6606FED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vacandum.Services", "Vacandum.Services\Vacandum.Services.csproj", "{4329D131-7DCE-41C6-8B42-7227E01E6015}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vacandum.EF", "Vacandum.EF\Vacandum.EF.csproj", "{C80EF62A-F735-4544-BFDB-E36004FF918E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{B125921B-6A9C-4B34-8E3C-6CC4C6606FED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B125921B-6A9C-4B34-8E3C-6CC4C6606FED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B125921B-6A9C-4B34-8E3C-6CC4C6606FED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4329D131-7DCE-41C6-8B42-7227E01E6015}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4329D131-7DCE-41C6-8B42-7227E01E6015}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4329D131-7DCE-41C6-8B42-7227E01E6015}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4329D131-7DCE-41C6-8B42-7227E01E6015}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C80EF62A-F735-4544-BFDB-E36004FF918E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C80EF62A-F735-4544-BFDB-E36004FF918E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C80EF62A-F735-4544-BFDB-E36004FF918E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C80EF62A-F735-4544-BFDB-E36004FF918E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
