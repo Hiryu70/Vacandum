@@ -15,7 +15,6 @@ namespace Vacandum.API.Controllers
 			_vacancyService = vacancyService;
 		}
 
-
 		[HttpGet]
 		[Route("test")]
 		public ActionResult<IEnumerable<string>> Get()
@@ -28,7 +27,6 @@ namespace Vacandum.API.Controllers
 		public ActionResult<string> UpdateVacancies()
 		{
 			_vacancyService.UpdateVacancies();
-
 
 			return "Вакансии обновлены";
 		}

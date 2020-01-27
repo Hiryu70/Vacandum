@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Vacandum.EF\Vacandum.EF.csproj" />
     <ProjectReference Include="..\Vacandum.Services\Vacandum.Services.csproj" />
   </ItemGroup>
 
