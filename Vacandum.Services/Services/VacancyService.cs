@@ -9,22 +9,34 @@ using Vacandum.Services.Models;
 
 namespace Vacandum.Services.Services
 {
+	/// <summary>
+	/// Vacancies service.
+	/// </summary>
 	public sealed class VacancyService : IVacancyService
 	{
 		private readonly IVacanciesRepository _vacanciesRepository;
+		private readonly IHeadHunterClient _headHunterClient;
 
-		public VacancyService(IVacanciesRepository vacanciesRepository)
+		/// <summary>
+		/// Constructor.
+		/// </summary>
+		/// <param name="vacanciesRepository">Vacancies repository.</param>
+		/// <param name="headHunterClient">Client for Head Hunter Api.</param>
+		public VacancyService(
+			IVacanciesRepository vacanciesRepository,
+			IHeadHunterClient headHunterClient)
 		{
 			_vacanciesRepository = vacanciesRepository;
+			_headHunterClient = headHunterClient;
 		}
 
+		/// <inheritdoc/>
 		public async Task UpdateVacancies()
 		{
-			var hhApi = RestService.For<IHeadHunterClient>("https://api.hh.ru");
-			VacancySearchResult vacanciesResult = await hhApi.GetVacancies();
+			VacancySearchResult vacanciesResult = await _headHunterClient.GetVacancies();
 
 			IEnumerable<Vacancy> vacancies = await _vacanciesRepository.GetVacancies();
-			foreach (var vacancyResult in vacanciesResult.Items)
+			foreach (Item vacancyResult in vacanciesResult.Items)
 			{
 				if (!vacancies.Any(v => v.ExternalId == vacancyResult.Id.ToString() && v.SavingDate == DateTime.Today))
 				{
@@ -40,15 +52,15 @@ namespace Vacandum.Services.Services
 						vacancy.Salary.To = vacancyResult.Salary.To;
 						vacancy.Salary.Currency = GetCurrency(vacancyResult.Salary.Currency);
 					}
+
 					vacancy.PublicationDate = DateTime.Parse(vacancyResult.PublishedAt);
 
 					await _vacanciesRepository.SaveVacancy(vacancy);
 				}
 			}
-
 		}
 
-		private Currency GetCurrency(string value)
+		private static Currency GetCurrency(string value)
 		{
 			switch (value)
 			{

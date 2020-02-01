@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="Rules for ConsoleApp" Description="Code analysis rules" ToolsVersion="15.0">
+  <IncludeAll Action="Warning" />
+  <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
+		<Rule Id="SA1005" Action="None" />
+		<Rule Id="SA1009" Action="None" />
+		<Rule Id="SA1027" Action="None" />
+		<Rule Id="SA1028" Action="None" />
+    <Rule Id="SA1101" Action="None" />
+		<Rule Id="SA1107" Action="None" />
+		<Rule Id="SA1111" Action="None" />
+		<Rule Id="SA1112" Action="None" />
+    <Rule Id="SA1133" Action="None" />
+    <Rule Id="SA1200" Action="None" />
+    <Rule Id="SA1208" Action="None" />
+    <Rule Id="SA1309" Action="None" />
+		<Rule Id="SA1413" Action="None" />
+		<Rule Id="SA1512" Action="None" />
+    <Rule Id="SA1515" Action="None" />
+		<Rule Id="SA1623" Action="None" />
+		<Rule Id="SA1633" Action="None" />
+    <Rule Id="SA1642" Action="None" />
+  </Rules>
+</RuleSet>

@@ -1,5 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
+#pragma warning disable 1591
+#pragma warning disable SA1600
 
 namespace Vacandum.Services.Dto
 {

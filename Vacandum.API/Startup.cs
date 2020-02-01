@@ -1,12 +1,13 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using Refit;
+using System;
+using System.IO;
+using System.Reflection;
 using Vacandum.EF;
 using Vacandum.Services.Abstractions;
 using Vacandum.Services.Services;
@@ -14,14 +15,14 @@ using Vacandum.Services.Services;
 namespace Vacandum.API
 {
 	/// <summary>
-	/// Startup
+	/// Startup.
 	/// </summary>
 	public class Startup
 	{
 		/// <summary>
-		/// Constructor
+		/// Constructor.
 		/// </summary>
-		/// <param name="configuration"></param>
+		/// <param name="configuration">Configuration.</param>
 		public Startup(IConfiguration configuration)
 		{
 			Configuration = configuration;
@@ -30,11 +31,16 @@ namespace Vacandum.API
 		private IConfiguration Configuration { get; }
 
 		/// <summary>
-		/// Configure services of App
+		/// Configure services of App.
 		/// </summary>
-		/// <param name="services">Collection of services</param>
+		/// <param name="services">Collection of services.</param>
 		public void ConfigureServices(IServiceCollection services)
 		{
+			services.AddRefitClient<IHeadHunterClient>().ConfigureHttpClient(c =>
+			{
+				c.BaseAddress = new Uri(Configuration.GetSection("HeadHunterApi").GetValue<string>("BaseUrl"));
+			});
+
 			services.AddSwaggerGen(c =>
 			{
 				c.SwaggerDoc("vacandum", new OpenApiInfo
@@ -54,10 +60,10 @@ namespace Vacandum.API
 		}
 
 		/// <summary>
-		/// Configure App
+		/// Configure App.
 		/// </summary>
-		/// <param name="app">Configurator of App</param>
-		/// <param name="env">Hosting environment</param>
+		/// <param name="app">Configurator of App.</param>
+		/// <param name="env">Hosting environment.</param>
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 		{
 			app.UseSwagger();
@@ -75,8 +81,7 @@ namespace Vacandum.API
 			{
 				app.UseHsts();
 			}
-
-			app.UseHttpsRedirection();
+			
 			app.UseMvc();
 		}
 	}

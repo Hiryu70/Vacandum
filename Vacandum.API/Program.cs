@@ -8,14 +8,14 @@ using Serilog;
 namespace Vacandum.API
 {
 	/// <summary>
-	/// Main class of app
+	/// Main class of app.
 	/// </summary>
 	public class Program
 	{
 		/// <summary>
-		/// Configuring of App
+		/// Configuring of App.
 		/// </summary>
-		/// <param name="args"></param>
+		/// <param name="args">Arguments.</param>
 		public static void Main(string[] args)
 		{
 			IConfiguration configuration = GetConfiguration();

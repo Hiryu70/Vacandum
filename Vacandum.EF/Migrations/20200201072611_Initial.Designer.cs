@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Vacandum.EF;
+#pragma warning disable CS1591
 
 namespace Vacandum.EF.Migrations
 {

@@ -4,10 +4,12 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <AssemblyName>Vacandum.API</AssemblyName>
     <RootNamespace>Vacandum.API</RootNamespace>
+    <CodeAnalysisRuleSet>$(SolutionDir)Vacandum.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>obj\Debug\netcoreapp2.2\\Vacandum.API.xml</DocumentationFile>
+    <DocumentationFile>obj\Debug\netcoreapp2.2\Vacandum.API.xml</DocumentationFile>
+    <NoWarn>8033,1701,1702</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,8 +19,14 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="refit" Version="4.7.9" />
+    <PackageReference Include="Refit.HttpClientFactory" Version="4.7.9" />
     <PackageReference Include="Serilog.AspNetCore" Version="3.2.0" />
     <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0" />
   </ItemGroup>
 

@@ -1,5 +1,8 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+#pragma warning disable 1591
+#pragma warning disable SA1600
+#pragma warning disable SA1601
 
 namespace Vacandum.EF.Migrations
 {
