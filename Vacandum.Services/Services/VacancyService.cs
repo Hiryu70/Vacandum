@@ -36,6 +36,15 @@ namespace Vacandum.Services.Services
 			VacancySearchResult vacanciesResult = await _headHunterClient.GetVacancies();
 
 			IEnumerable<Vacancy> vacancies = await _vacanciesRepository.GetVacancies();
+
+			for (long i = vacanciesResult.Page; i < vacanciesResult.Pages; i++)
+			{
+				await SeachItems(vacanciesResult, vacancies);
+			}
+		}
+
+		private async Task SeachItems(VacancySearchResult vacanciesResult, IEnumerable<Vacancy> vacancies)
+		{
 			foreach (Item vacancyResult in vacanciesResult.Items)
 			{
 				if (!vacancies.Any(v => v.ExternalId == vacancyResult.Id.ToString() && v.SavingDate == DateTime.Today))
