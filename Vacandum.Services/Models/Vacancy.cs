@@ -46,5 +46,10 @@ namespace Vacandum.Services.Models
 		/// Employer company.
 		/// </summary>
 		public Company Company { get; set; } = new Company();
+
+		/// <summary>
+		/// Page.
+		/// </summary>
+		public long Page { get; set; }
 	}
 }

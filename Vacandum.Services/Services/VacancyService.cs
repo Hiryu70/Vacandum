@@ -39,11 +39,11 @@ namespace Vacandum.Services.Services
 
 			for (long i = vacanciesResult.Page; i < vacanciesResult.Pages; i++)
 			{
-				await SeachItems(vacanciesResult, vacancies);
+				await GetVacanciesPerPage(vacanciesResult, vacancies);
 			}
 		}
 
-		private async Task SeachItems(VacancySearchResult vacanciesResult, IEnumerable<Vacancy> vacancies)
+		private async Task GetVacanciesPerPage(VacancySearchResult vacanciesResult, IEnumerable<Vacancy> vacancies)
 		{
 			foreach (Item vacancyResult in vacanciesResult.Items)
 			{
@@ -61,6 +61,8 @@ namespace Vacandum.Services.Services
 						vacancy.Salary.To = vacancyResult.Salary.To;
 						vacancy.Salary.Currency = GetCurrency(vacancyResult.Salary.Currency);
 					}
+
+					vacancy.Page = vacancyResult.Page;
 
 					vacancy.PublicationDate = DateTime.Parse(vacancyResult.PublishedAt);
 
