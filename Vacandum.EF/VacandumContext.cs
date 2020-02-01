@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.IO;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Vacandum.Services.Models;
 
 namespace Vacandum.EF
@@ -8,6 +11,13 @@ namespace Vacandum.EF
 	/// </summary>
 	public class VacandumContext : DbContext
 	{
+		/// <summary>
+		/// Constructor.
+		/// </summary>
+		public VacandumContext()
+		{
+		}
+
 		/// <summary>
 		/// Constructor.
 		/// </summary>
@@ -26,5 +36,26 @@ namespace Vacandum.EF
 		/// Companies.
 		/// </summary>
 		public DbSet<Company> Companies { get; set; }
+
+		/// <inheritdoc />
+		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+		{
+			if (!optionsBuilder.IsConfigured)
+			{
+				var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+				if (string.IsNullOrEmpty(environment))
+				{
+					environment = "Development";
+				}
+
+				IConfigurationRoot configuration = new ConfigurationBuilder()
+					.SetBasePath(Directory.GetCurrentDirectory())
+					.AddJsonFile("appsettings.json")
+					.AddJsonFile($"appsettings.{environment}.json")
+					.Build();
+
+				optionsBuilder.UseMySQL(configuration.GetConnectionString("VacandumConnection"));
+			}
+		}
 	}
 }
