@@ -9,8 +9,8 @@ using Vacandum.EF;
 namespace Vacandum.EF.Migrations
 {
     [DbContext(typeof(VacandumContext))]
-    [Migration("20200127195512_Vacancies")]
-    partial class Vacancies
+    [Migration("20200201072611_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,11 +24,13 @@ namespace Vacandum.EF.Migrations
                         .ValueGeneratedOnAdd()
                         .HasConversion(new ValueConverter<byte[], byte[]>(v => default(byte[]), v => default(byte[]), new ConverterMappingHints(size: 16)));
 
+                    b.Property<string>("ExternalId");
+
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Company");
+                    b.ToTable("Companies");
                 });
 
             modelBuilder.Entity("Vacandum.Services.Models.Salary", b =>
@@ -39,9 +41,9 @@ namespace Vacandum.EF.Migrations
 
                     b.Property<int>("Currency");
 
-                    b.Property<float>("From");
+                    b.Property<float?>("From");
 
-                    b.Property<float>("To");
+                    b.Property<float?>("To");
 
                     b.HasKey("Id");
 

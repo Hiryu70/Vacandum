@@ -22,11 +22,13 @@ namespace Vacandum.EF.Migrations
                         .ValueGeneratedOnAdd()
                         .HasConversion(new ValueConverter<byte[], byte[]>(v => default(byte[]), v => default(byte[]), new ConverterMappingHints(size: 16)));
 
+                    b.Property<string>("ExternalId");
+
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Company");
+                    b.ToTable("Companies");
                 });
 
             modelBuilder.Entity("Vacandum.Services.Models.Salary", b =>
@@ -37,9 +39,9 @@ namespace Vacandum.EF.Migrations
 
                     b.Property<int>("Currency");
 
-                    b.Property<float>("From");
+                    b.Property<float?>("From");
 
-                    b.Property<float>("To");
+                    b.Property<float?>("To");
 
                     b.HasKey("Id");
 

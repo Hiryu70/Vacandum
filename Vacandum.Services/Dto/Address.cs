@@ -17,10 +17,10 @@ namespace Vacandum.Services.Dto
 		public object Description { get; set; }
 
 		[JsonProperty("lat")]
-		public double Lat { get; set; }
+		public double? Lat { get; set; }
 
 		[JsonProperty("lng")]
-		public double Lng { get; set; }
+		public double? Lng { get; set; }
 
 		[JsonProperty("raw")]
 		public string Raw { get; set; }

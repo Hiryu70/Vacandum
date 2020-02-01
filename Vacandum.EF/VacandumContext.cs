@@ -5,11 +5,16 @@ namespace Vacandum.EF
 {
 	public class VacandumContext : DbContext
 	{
-		public DbSet<Vacancy> Vacancies { get; set; }
-
-		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+		/// <summary>
+		/// Конструктор.
+		/// </summary>
+		/// <param name="options">Параметры создания контекста.</param>
+		public VacandumContext(DbContextOptions<VacandumContext> options)
+			: base(options)
 		{
-			optionsBuilder.UseMySQL(@"server=127.0.0.1;uid=root;pwd=;database=vacandum");
 		}
+
+		public DbSet<Vacancy> Vacancies { get; set; }
+		public DbSet<Company> Companies { get; set; }
 	}
 }

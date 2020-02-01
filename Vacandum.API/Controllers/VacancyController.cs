@@ -1,34 +1,38 @@
-﻿using System.Collections.Generic;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Vacandum.Services.Abstractions;
 
 namespace Vacandum.API.Controllers
 {
+	/// <summary>
+	/// Vacancies controller.
+	/// </summary>
 	[Route("api/vacancy")]
 	[ApiController]
 	public class VacancyController : ControllerBase
 	{
 		private readonly IVacancyService _vacancyService;
 
+		/// <summary>
+		/// Constructor
+		/// </summary>
+		/// <param name="vacancyService">Vacancy service</param>
 		public VacancyController(IVacancyService vacancyService)
 		{
 			_vacancyService = vacancyService;
 		}
 
-		[HttpGet]
-		[Route("test")]
-		public ActionResult<IEnumerable<string>> Get()
-		{
-			return new string[] { "value1", "value2" };
-		}
-
+		/// <summary>
+		/// Update vacancies in database from site
+		/// </summary>
+		/// <returns></returns>
 		[HttpPost]
 		[Route("update")]
-		public ActionResult<string> UpdateVacancies()
+		public async Task<ActionResult<string>> UpdateVacancies()
 		{
-			_vacancyService.UpdateVacancies();
+			await _vacancyService.UpdateVacancies();
 
-			return "Вакансии обновлены";
+			return "Vacancies updated";
 		}
 	}
 }

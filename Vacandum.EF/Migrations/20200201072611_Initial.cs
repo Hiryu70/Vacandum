@@ -3,23 +3,21 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Vacandum.EF.Migrations
 {
-    public partial class Vacancies : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Classes");
-
             migrationBuilder.CreateTable(
-                name: "Company",
+                name: "Companies",
                 columns: table => new
                 {
                     Id = table.Column<byte[]>(nullable: false),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: true),
+                    ExternalId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Company", x => x.Id);
+                    table.PrimaryKey("PK_Companies", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -27,8 +25,8 @@ namespace Vacandum.EF.Migrations
                 columns: table => new
                 {
                     Id = table.Column<byte[]>(nullable: false),
-                    From = table.Column<float>(nullable: false),
-                    To = table.Column<float>(nullable: false),
+                    From = table.Column<float>(nullable: true),
+                    To = table.Column<float>(nullable: true),
                     Currency = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -53,9 +51,9 @@ namespace Vacandum.EF.Migrations
                 {
                     table.PrimaryKey("PK_Vacancies", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Vacancies_Company_CompanyId",
+                        name: "FK_Vacancies_Companies_CompanyId",
                         column: x => x.CompanyId,
-                        principalTable: "Company",
+                        principalTable: "Companies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -83,23 +81,10 @@ namespace Vacandum.EF.Migrations
                 name: "Vacancies");
 
             migrationBuilder.DropTable(
-                name: "Company");
+                name: "Companies");
 
             migrationBuilder.DropTable(
                 name: "Salary");
-
-            migrationBuilder.CreateTable(
-                name: "Classes",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
-                    Name = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Classes", x => x.Id);
-                });
         }
     }
 }

@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/vacancy/test",
+      "launchUrl": "api/vacandum/swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -20,8 +20,8 @@
     "Vacandum": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/vacancy/test",
-      "applicationUrl": "https://localhost:5001;http://localhost:5000",
+      "launchUrl": "api/vacandum/swagger",
+      "applicationUrl": "http://localhost:5000;https://localhost:5001",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

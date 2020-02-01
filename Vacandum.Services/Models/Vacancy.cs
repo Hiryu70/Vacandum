@@ -12,12 +12,12 @@ namespace Vacandum.Services.Models
 
 		public string Title { get; set; }
 
-		public Salary Salary { get; set; }
+		public Salary Salary { get; set; } = new Salary();
 
 		public Experience Experience { get; set; }
 
 		public DateTime PublicationDate { get; set; } 
 
-		public Company Company { get; set; }
+		public Company Company { get; set; } = new Company();
 	}
 }
