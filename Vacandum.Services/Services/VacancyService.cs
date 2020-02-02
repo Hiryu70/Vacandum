@@ -36,6 +36,15 @@ namespace Vacandum.Services.Services
 			VacancySearchResult vacanciesResult = await _headHunterClient.GetVacancies();
 
 			IEnumerable<Vacancy> vacancies = await _vacanciesRepository.GetVacancies();
+
+			for (long i = vacanciesResult.Page; i < vacanciesResult.Pages; i++)
+			{
+				await GetVacanciesPerPage(vacanciesResult, vacancies);
+			}
+		}
+
+		private async Task GetVacanciesPerPage(VacancySearchResult vacanciesResult, IEnumerable<Vacancy> vacancies)
+		{
 			foreach (Item vacancyResult in vacanciesResult.Items)
 			{
 				if (!vacancies.Any(v => v.ExternalId == vacancyResult.Id.ToString() && v.SavingDate == DateTime.Today))
@@ -52,6 +61,8 @@ namespace Vacandum.Services.Services
 						vacancy.Salary.To = vacancyResult.Salary.To;
 						vacancy.Salary.Currency = GetCurrency(vacancyResult.Salary.Currency);
 					}
+
+					vacancy.Page = vacancyResult.Page;
 
 					vacancy.PublicationDate = DateTime.Parse(vacancyResult.PublishedAt);
 

@@ -75,5 +75,8 @@ namespace Vacandum.Services.Dto
 
 		[JsonProperty("contacts")]
 		public Contacts Contacts { get; set; }
+
+		[JsonProperty("page")]
+		public long Page { get; set; }
 	}
 }
