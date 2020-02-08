@@ -33,30 +33,39 @@ namespace Vacandum.Services.Services
 		/// <inheritdoc/>
 		public async Task UpdateVacancies()
 		{
-			VacancySearchResult vacanciesResult = await _headHunterClient.GetVacancies();
+			VacancySearchResult siteVacanciesResult = await _headHunterClient.GetVacancies();
+			IEnumerable<Vacancy> dbVacancies = await _vacanciesRepository.GetVacancies();
 
-			IEnumerable<Vacancy> vacancies = await _vacanciesRepository.GetVacancies();
-			foreach (Item vacancyResult in vacanciesResult.Items)
+			foreach (Item siteVacancy in siteVacanciesResult.Items)
 			{
-				if (!vacancies.Any(v => v.ExternalId == vacancyResult.Id.ToString() && v.SavingDate == DateTime.Today))
-				{
-					var vacancy = new Vacancy();
-					vacancy.ExternalId = vacancyResult.Id.ToString();
-					vacancy.SavingDate = DateTime.Today;
-					vacancy.Title = vacancyResult.Name;
-					vacancy.Company = await _vacanciesRepository.GetCompany(vacancyResult.Employer.Id.ToString());
-					vacancy.Company.Name = vacancyResult.Employer.Name;
-					if (vacancyResult.Salary != null)
-					{
-						vacancy.Salary.From = vacancyResult.Salary.From;
-						vacancy.Salary.To = vacancyResult.Salary.To;
-						vacancy.Salary.Currency = GetCurrency(vacancyResult.Salary.Currency);
-					}
+				SaveVacancy(siteVacancy, dbVacancies);
+			}
+		}
 
-					vacancy.PublicationDate = DateTime.Parse(vacancyResult.PublishedAt);
+		private async void SaveVacancy(Item siteVacancy, IEnumerable<Vacancy> dbVacancies)
+		{
+			if (!dbVacancies.Any(v => v.ExternalId == siteVacancy.Id.ToString() && v.SavingDate == DateTime.Today))
+			{
+				var dbVacancy = new Vacancy();
+				dbVacancy.ExternalId = siteVacancy.Id.ToString();
+				dbVacancy.SavingDate = DateTime.Today;
+				dbVacancy.Title = siteVacancy.Name;
+				dbVacancy.Company = await _vacanciesRepository.GetCompany(siteVacancy.Employer.Id.ToString());
+				dbVacancy.Company.Name = siteVacancy.Employer.Name;
+				FillSalaryData(dbVacancy, siteVacancy);
 
-					await _vacanciesRepository.SaveVacancy(vacancy);
-				}
+				dbVacancy.PublicationDate = DateTime.Parse(siteVacancy.PublishedAt);
+
+				await _vacanciesRepository.SaveVacancy(dbVacancy);
+			}
+		}
+		private void FillSalaryData(Vacancy dbVacancy, Item siteVacancy)
+		{
+			if (siteVacancy.Salary != null)
+			{
+				dbVacancy.Salary.From = siteVacancy.Salary.From;
+				dbVacancy.Salary.To = siteVacancy.Salary.To;
+				dbVacancy.Salary.Currency = GetCurrency(siteVacancy.Salary.Currency);
 			}
 		}
 
