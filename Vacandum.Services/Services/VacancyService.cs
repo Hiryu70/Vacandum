@@ -59,6 +59,7 @@ namespace Vacandum.Services.Services
 				await _vacanciesRepository.SaveVacancy(dbVacancy);
 			}
 		}
+
 		private void FillSalaryData(Vacancy dbVacancy, Item siteVacancy)
 		{
 			if (siteVacancy.Salary != null)
