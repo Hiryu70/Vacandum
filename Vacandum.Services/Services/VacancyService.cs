@@ -53,7 +53,6 @@ namespace Vacandum.Services.Services
 				dbVacancy.Company = await _vacanciesRepository.GetCompany(siteVacancy.Employer.Id.ToString());
 				dbVacancy.Company.Name = siteVacancy.Employer.Name;
 				FillSalaryData(dbVacancy, siteVacancy);
-
 				dbVacancy.PublicationDate = DateTime.Parse(siteVacancy.PublishedAt);
 
 				await _vacanciesRepository.SaveVacancy(dbVacancy);
